@@ -11,10 +11,28 @@ class OADP:
         for i in range(2, n):
             table[i] = min(table[i-1] + abs(nums[i-1] - nums[i]) , table[i-2] + abs(nums[i-2] - nums[i]))
         
-        print('hi',table[-1])
+        #print('hi',table[-1])
         return table[-1]
     
 
     minFrogJump([10,30,40,20])
     minFrogJump([10,10])
     minFrogJump([30,10,60,10,60,50])
+
+    def minCostNjumps(h, k):
+        if h is None or len(h) == 0:
+            return 0
+        m = len(h)
+        table = [float('inf') for _ in range(m)]
+        table[0] = 0
+        for i in range(1, m):
+            for j in range(1, k+1):
+                if i - j >= 0:
+                    table[i] = min(table[i], table[i-j] + abs(h[i-j] - h[i]))
+        print('hi ',table[-1])
+        return table[-1]
+
+    minCostNjumps([10,30,40,50,20], 3)
+    minCostNjumps([10,20,10], 1)
+    minCostNjumps([10,10], 100)
+    minCostNjumps([40,10,20,70,80,10,20,70,80,60], 4)
