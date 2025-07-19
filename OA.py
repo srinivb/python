@@ -48,9 +48,26 @@ class OADP:
             bug[i] = max(swim[i-1], hw[i-1]) + b[i]
             hw[i] = max(swim[i-1], bug[i-1]) + c[i]
         
-        print('hi ',max(swim[-1], bug[-1], hw[-1]))
+        #print('hi ',max(swim[-1], bug[-1], hw[-1]))
         return max(swim[-1], bug[-1], hw[-1])
             
     CVacation(3,[10,20,30],[40,50,60],[70,80,90])
     CVacation(1,[100],[10],[1])
     CVacation(7,[6,8,2,7,4,2,7],[7,8,5,8,6,3,5],[8,3,2,6,8,4,1])
+
+    def knapsack1(n, c, w, v):
+        table = [[0 for _ in range(c+1)] for _ in range(n+1)]
+
+        for i in range(1, n+1):
+            for j in range(1, c+1):
+                table[i][j] = table[i-1][j]
+                if j - w[i-1] >= 0:
+                    table[i][j] = max(table[i][j], table[i-1][j-w[i-1]] + v[i-1])
+                    
+                       
+        print('hi ',table[-1][-1])
+        return table[-1][-1]
+
+    #knapsack1(3, 8, [3,4,5], [30,50,60])
+    #knapsack1(5, 5, [1,1,1,1,1], [1000000000,1000000000,1000000000,1000000000,1000000000])
+    knapsack1(6, 15, [6,5,6,6,3,7], [5,6,4,6,5,2])
